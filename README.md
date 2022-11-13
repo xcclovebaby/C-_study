@@ -13,11 +13,11 @@
 
 <br>
 
-[02.引用](./02-study/main.cpp)
+[02.引用/内联函数/默认参数/占位参数/函数的重载](./02-study/main.cpp)
 
 <br>
 
-[03.内联函数](./03-study/main.cpp)
+[03.类](./03-study/main.cpp)
 
 <br>
 
