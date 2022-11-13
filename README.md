@@ -3,8 +3,21 @@
 
 ## 笔记目录
 
-[01.基本语法以及数据类型](./01-study/main.cpp)
+[01.C++的基本语法](./01-study/main.cpp)
 > * 1.冒号的作用域
 > * 2.namespace（命名空间/作用域）
 > * 3.using声明
+> * 4.bool类型
+> * 5.三目运算符
+> * 6.const
+
+<br>
+
+[02.引用](./02-study/main.cpp)
+
+<br>
+
+[03.内联函数](./03-study/main.cpp)
+
+<br>
 

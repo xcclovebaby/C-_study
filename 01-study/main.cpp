@@ -15,6 +15,9 @@ const static int b = 30; //全局静态常量
  * 1.冒号的作用域
  * 2.namespace（命名空间/作用域）
  * 3.using声明
+ * 4.bool类型
+ * 5.三目运算符
+ * 6.const
  *  ==========================
  */
 
@@ -75,6 +78,64 @@ void test2() {
     NEW_A::foo();
 }
 
+/** 3.using声明 */
+/* usingg声明可以使得指定的标识符可用
+ * 拿上面定义的namespace A来演示
+ * using A::a;
+ * 这样后面使用a可以无需再指定是哪个命名空间下的a
+ * 在全局使用using来指定的话，还需要注意不要重名
+ */
+using A::foo;
+void test3() {
+    using A::a;
+    using namespace A;
+    cout << a << endl;
+    cout << c << endl;
+}
+
+/** 4.bool类型 */
+/* C++新增bool类型
+ * bool类型有两个内建的常量：true/false. true转换为整数1,false转换为整数0
+ * bool类型只有这两个值：true(1)/false(0)
+ * bool类型占1个字节
+ * 给bool类型赋值时,非0会自动转换为true,0会自动转换为false
+ */
+void test4() {
+    cout << "test4:" << endl;
+    cout << "sizeof(false) = " << sizeof(false) <<endl;
+    bool flag = true;
+    cout << "flag = " << flag << endl;
+    flag = 100;
+    cout << "flag = " << flag << endl;
+}
+
+/** 5.三目运算符 */
+/* C中三目运算符返回的是一个常量
+ * C++中三目运算符返回的是一个变量
+ * 既然是变量则可以赋值
+ */
+void test5() {
+    int a = 10, b = 20;
+    (a < b? a: b) = 100;
+}
+
+/** 6.const */
+/* c++中const修饰局部变量时会把变量保存在符号表中
+ * 对const修饰的变量取地址 编译器会临时产生一个变量来保存a的地址
+ * 所以取出来的地址就是临时变量所在空间的地址
+ * int temp = a;
+ * int *p = &temp;
+ *
+ * const修饰的全局变量和c语言一样都放在常量区
+ * 但在c++中想使用外部的全局常量都需要用extern来修饰
+ */
+extern const int i = 1000; //在同级目录的文件中也得是用相同的语句来连接该常量
+void test6() {
+    const int a = 10;
+    int *p = (int *)&a; //C++中对数据类型比较敏感， &a的类型是int 而p的类型是 int *所以在赋值时需要强制类型转换
+    *p = 100;
+    cout<< a<< endl; //这里依然是10
+}
 
 int main()
 {
@@ -88,5 +149,8 @@ int main()
 
     test1();
     test2();
+    test3();
+    test4();
+    test6();
     return 0;
 }
