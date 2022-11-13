@@ -11,6 +11,8 @@ using namespace std;
  * 5.内联函数
  * 6.函数的默认参数
  * 7.占位参数
+ * 8.函数的重载
+ * 9.extern C
  *  ==========================
  */
 
@@ -148,11 +150,39 @@ void test6() {
 }
 
 /** 7.占位参数 */
+/* C++在声明函数时，可以设置占位参数
+ * 占位参数只有参数类型声明，没有参数名
+ */
+void test7_fun(int a, int b, int) {
+    //内部无法使用占位参数
+}
+//占位参数可以设置默认值
+void test7_fun1(int a, int b, int = 10) {
+}
+
+/** 8.函数的重载 */
+/* 函数的重载就是函数名相同，但是函数形参不一样
+ * 函数的重载需要在同一作用域下
+ * void fun(int a);
+ * void fun(int a, int b);
+ */
+
+/** 9.extern C */
+/* 如果C++中需要引用C的代码
+ * 在头文件中需要声明一个跟c函数一样的函数
+ * extern "C" int myadd(int a, int b);
+ */
+#include <head.h>
+void test9() {
+    int a = 10, b = 20;
+    cout << myadd(a, b) << endl;
+}
 
 int main() {
     test1();
     test2();
     test5();
     test6();
+    test9();
     return 0;
 }
