@@ -7,6 +7,12 @@ using namespace std;
  * 1.vector容器
  * 2.vector相关api
  * 3.string容器
+ * 4.deque容器
+ * 5.stack容器
+ * 6.queue容器
+ * 7.list容器
+ * 8.set容器
+ * 9.map容器
  *  ==========================
  */
 
@@ -66,9 +72,52 @@ void test1() {
     for_each(v.begin(), v.end(), printInt);
 }
 
-/** 2.vector相关api */
-void test2() {
+void printVector(vector<int> &v) {
+    for(vector<int>::iterator it = v.begin(); it !=  v.end(); it++) {
+        cout<< *it<< " ";
+    }
+    cout<< endl;
+}
 
+/** 2.vector相关api */
+/* 赋值：assign operator=
+ * 容量大小：empty是否为空/capacity容量/size元素个数/resize(int num)重新指定容器元素个数
+ * 插入：push_back/insert(iterator pos, ele)迭代器指向位置插入元素ele
+ * 删除：pop_back弹栈/clear清空/erase(iterator pos)删除迭代器指向的位置/erase(iterator start, iterator end)删除从start-end之间的元素
+ * 存取：at(int index)返回index所指的数据/operator[]/front返回容器第一个元素/back返回容器最后一个元素\
+ * 互换：swap(vec)将vec于本身元素互换
+ * 预留空间：reserve(int len) 预留len个元素长度
+ */
+void test2() {
+    vector<int> v1;
+    for(int i = 0; i < 10; i++) {
+        v1.push_back(i);
+    }
+    //赋值
+    vector<int> v2;
+    v2 = v1;
+    printVector(v2);
+
+    vector<int> v3;
+    v3.assign(v1.begin(), v1.end());
+    printVector(v3);
+
+    vector<int> v4;
+    v4.assign(10, 100);
+    printVector(v4);
+
+    //利用swap回收空间
+    vector<int> v5;
+    for(int i = 0; i < 10000; i++) {
+        v5.push_back(i);
+    }
+    cout<< v5.capacity()<< endl;
+    cout<< v5.size()<< endl;
+
+    v5.resize(3);//容器容量不变 但是只有3个元素 太耗费空间
+    vector<int>(v5).swap(v5); //利用匿名对象机制交换空间，编译器会自动回收匿名对象所占用的内存
+    cout<< v5.capacity()<< endl;
+    cout<< v5.size()<< endl;
 }
 
 /** 3.string容器 */
@@ -120,10 +169,45 @@ void test3() {
     cout<< s9<< endl;
 }
 
+/** 4.deque容器 */
+/* deque容器的尾部插入删除操作与vector一致
+ * 赋值：assign operator=
+ * 容量大小：empty是否为空/size元素个数/resize(int num)重新指定容器元素个数
+ * 插入：push_back/push_front头部插入/insert(iterator pos, ele)迭代器指向位置插入元素ele
+ * 删除：pop_back/pop_front头部删除/clear清空/erase(iterator pos)删除迭代器指向的位置/erase(iterator start, iterator end)删除从start-end之间的元素
+ * 存取：at(int index)返回index所指的数据/operator[]/front返回容器第一个元素/back返回容器最后一个元素
+ *
+ * sort(iterator start, iterator end) 从start-end之间排序
+ */
+#include <deque>
+
+//const_iteratorwe为函数形参使用const修饰的迭代器
+void printDeque(const deque<int> &d) {
+    for(deque<int>::const_iterator it = d.begin(); it !=  d.end(); it++) {
+        cout<< *it<< " ";
+    }
+    cout<< endl;
+}
+
+void test4() {
+    deque<int> d1;
+    for(int i = 0; i < 10; i++) {
+        d1.push_back(i);
+    }
+    printDeque(d1);
+    sort(d1.begin(), d1.end());
+    printDeque(d1);
+}
+
+/** 5.stack容器 */
+/* stack(栈)先进后出,只有一个出口
+ */
+
 int main()
 {
     test1();
     test2();
     test3();
+    test4();
     return 0;
 }
